@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/NetOps.Api/NetOps.Api.csproj" />
+    <Project Path="src/NetOps.Application/NetOps.Application.csproj" />
+    <Project Path="src/NetOps.Domain/NetOps.Domain.csproj" />
+    <Project Path="src/NetOps.Infrastructure/NetOps.Infrastructure.csproj" />
+  </Folder>
+</Solution>
