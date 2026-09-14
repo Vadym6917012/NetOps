@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:18
+    container_name: netops-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: netops
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - netops-postgres-data:/var/lib/postgresql
+
+volumes:
+  netops-postgres-data:

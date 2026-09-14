@@ -5,4 +5,7 @@
     <Project Path="src/NetOps.Domain/NetOps.Domain.csproj" />
     <Project Path="src/NetOps.Infrastructure/NetOps.Infrastructure.csproj" />
   </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/NetOps.UnitTests/NetOps.UnitTests.csproj" />
+  </Folder>
 </Solution>
