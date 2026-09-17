@@ -1,7 +1,4 @@
 ﻿using NetOps.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using NetOps.Domain.Enums;
 
 namespace NetOps.UnitTests.Domain
@@ -16,7 +13,7 @@ namespace NetOps.UnitTests.Domain
                 "WI-FI problem",
                 "Customer has unstable WI-FI conneection.",
                 RequestPriority.High);
-            
+
             // Assert
             Assert.Equal(RequestStatus.New, request.Status);
         }

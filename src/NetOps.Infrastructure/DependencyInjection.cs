@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using NetOps.Application.Abstractions;
 using NetOps.Infrastructure.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using NetOps.Infrastructure.Persistence.Repositories;
 
 namespace NetOps.Infrastructure
 {
@@ -15,6 +14,8 @@ namespace NetOps.Infrastructure
         {
             services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(connectionString));
+
+            services.AddScoped<IServiceRequestRepository, ServiceRequestRepository>();
 
             return services;
         }

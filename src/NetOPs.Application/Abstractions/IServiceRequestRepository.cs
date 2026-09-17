@@ -1,7 +1,4 @@
 ﻿using NetOps.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NetOps.Application.Abstractions
 {
@@ -13,6 +10,9 @@ namespace NetOps.Application.Abstractions
 
         Task<ServiceRequest?> GetByIdAsync(
             Guid id,
+            CancellationToken cancellationToken);
+
+        Task<IReadOnlyList<ServiceRequest>> GetAllAsync(
             CancellationToken cancellationToken);
     }
 }

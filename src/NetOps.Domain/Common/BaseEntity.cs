@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace NetOps.Domain.Common
+﻿namespace NetOps.Domain.Common
 {
     public abstract class BaseEntity
     {

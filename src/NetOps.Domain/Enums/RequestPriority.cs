@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace NetOps.Domain.Enums
+﻿namespace NetOps.Domain.Enums
 {
     public enum RequestPriority
     {

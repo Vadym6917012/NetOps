@@ -1,14 +1,12 @@
 ﻿using MediatR;
 using NetOps.Application.Abstractions;
+using NetOps.Application.Requests.DTOs;
 using NetOps.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NetOps.Application.Requests.Commands
 {
     public sealed class CreateRequestCommandHandler
-        : IRequestHandler<CreateRequestCommand, Guid>
+        : IRequestHandler<CreateRequestCommand, ServiceRequestDto>
     {
         private readonly IServiceRequestRepository _repository;
 
@@ -16,9 +14,9 @@ namespace NetOps.Application.Requests.Commands
             IServiceRequestRepository repository)
         {
             _repository = repository;
-        
+
         }
-        public async Task<Guid> Handle(
+        public async Task<ServiceRequestDto> Handle(
             CreateRequestCommand request,
             CancellationToken cancellationToken)
         {
@@ -31,7 +29,7 @@ namespace NetOps.Application.Requests.Commands
                 serviceRequest,
                 cancellationToken);
 
-            return serviceRequest.Id;
+            return serviceRequest.ToDto();
         }
     }
 }

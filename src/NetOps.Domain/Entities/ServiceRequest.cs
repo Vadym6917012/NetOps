@@ -1,8 +1,5 @@
 ﻿using NetOps.Domain.Common;
 using NetOps.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NetOps.Domain.Entities
 {
@@ -19,14 +16,14 @@ namespace NetOps.Domain.Entities
         private ServiceRequest() { }
 
         public ServiceRequest(
-            string title, 
-            string description, 
+            string title,
+            string description,
             RequestPriority priority)
         {
-            if( string.IsNullOrWhiteSpace(title) )
+            if ( string.IsNullOrWhiteSpace(title) )
                 throw new ArgumentException("Title cannot be null or empty.", nameof(title));
-            
-            if( string.IsNullOrWhiteSpace(description) )
+
+            if ( string.IsNullOrWhiteSpace(description) )
                 throw new ArgumentException("Description cannot be null or empty.", nameof(description));
 
             Title = title;
@@ -46,7 +43,7 @@ namespace NetOps.Domain.Entities
 
         public void StartWork()
         {
-            if ( Status != RequestStatus.Assigned)
+            if ( Status != RequestStatus.Assigned )
                 throw new InvalidOperationException(
                     "Only assigned requests can be started.");
 
@@ -55,7 +52,7 @@ namespace NetOps.Domain.Entities
 
         public void Complete()
         {
-            if (Status != RequestStatus.InProgress)
+            if ( Status != RequestStatus.InProgress )
                 throw new InvalidOperationException(
                     "Only in-progress requests can be completed.");
 
