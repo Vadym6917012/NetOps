@@ -16,11 +16,11 @@ namespace NetOps.Infrastructure
                 options.UseNpgsql(connectionString));
 
             services.AddScoped<
-                IServiceRequestRepository, 
+                IServiceRequestRepository,
                 ServiceRequestRepository>();
 
             services.AddScoped<
-                IUnitOfWork, 
+                IUnitOfWork,
                 UnitOfWork>();
 
             return services;

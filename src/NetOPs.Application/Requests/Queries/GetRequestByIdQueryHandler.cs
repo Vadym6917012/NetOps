@@ -13,7 +13,7 @@ namespace NetOps.Application.Requests.Queries
             _repository = repository;
         }
 
-        public async Task<ServiceRequestDto ?> Handle(
+        public async Task<ServiceRequestDto?> Handle(
             GetRequestByIdQuery request,
             CancellationToken cancellationToken)
         {

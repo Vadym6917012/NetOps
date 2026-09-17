@@ -1,6 +1,5 @@
 using FluentValidation;
 using NetOps.Api.Exceptions;
-using MediatR;
 using NetOps.Application.Common.Behaviors;
 using NetOps.Application.Requests.Commands;
 using NetOps.Infrastructure;

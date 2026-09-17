@@ -21,11 +21,11 @@ namespace NetOps.Domain.Entities
             string description,
             RequestPriority priority)
         {
-            if ( string.IsNullOrWhiteSpace(title))
+            if ( string.IsNullOrWhiteSpace(title) )
                 throw new ArgumentException(
                      "Title cannot be null or empty.", nameof(title));
 
-            if ( string.IsNullOrWhiteSpace(description))
+            if ( string.IsNullOrWhiteSpace(description) )
                 throw new ArgumentException(
                     "Description cannot be null or empty.", nameof(description));
 

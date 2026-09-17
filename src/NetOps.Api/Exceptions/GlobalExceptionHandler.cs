@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using NetOps.Domain.Exceptions;
 using NetOps.Application.Exceptions;
+using NetOps.Domain.Exceptions;
 
 namespace NetOps.Api.Exceptions
 {
@@ -22,7 +22,7 @@ namespace NetOps.Api.Exceptions
             Exception exception,
             CancellationToken cancellationToken)
         {
-            if (exception is NotFoundException notFoundException)
+            if ( exception is NotFoundException notFoundException )
             {
                 httpContext.Response.StatusCode =
                     StatusCodes.Status404NotFound;
@@ -42,7 +42,7 @@ namespace NetOps.Api.Exceptions
                     });
             }
 
-            if (exception is BusinessRuleException businessRuleException)
+            if ( exception is BusinessRuleException businessRuleException )
             {
                 httpContext.Response.StatusCode =
                     StatusCodes.Status409Conflict;
@@ -62,7 +62,7 @@ namespace NetOps.Api.Exceptions
                     });
             }
 
-            if (exception is not ValidationException validationException)
+            if ( exception is not ValidationException validationException )
                 return false;
 
             httpContext.Response.StatusCode =
@@ -80,14 +80,14 @@ namespace NetOps.Api.Exceptions
             {
                 Status = StatusCodes.Status400BadRequest,
                 Title = "Validation failed",
-                Detail = "One or more validation errors occurred." 
+                Detail = "One or more validation errors occurred."
             };
 
             problemDetails.Extensions ["errors"] = errors;
 
             return await _problemDetailsService.TryWriteAsync(
-                new ProblemDetailsContext 
-                { 
+                new ProblemDetailsContext
+                {
                     HttpContext = httpContext,
                     ProblemDetails = problemDetails
                 });

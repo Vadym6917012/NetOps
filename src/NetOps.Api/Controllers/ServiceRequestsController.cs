@@ -45,6 +45,18 @@ namespace NetOps.Api.Controllers
             return NoContent();
         }
 
+        [HttpPost("{id:guid}/start")]
+        public async Task<IActionResult> Start(
+            Guid id,
+            CancellationToken cancellationToken)
+        {
+            await _sender.Send(
+                new StartRequestCommand(id),
+                cancellationToken);
+
+            return NoContent();
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAll(
             CancellationToken cancellationToken)

@@ -4,13 +4,13 @@ using NetOps.Application.Exceptions;
 
 namespace NetOps.Application.Requests.Commands
 {
-    public sealed class AssignRequestCommandHandler
-        : IRequestHandler<AssignRequestCommand>
+    public sealed class StartRequestCommandHandler
+        : IRequestHandler<StartRequestCommand>
     {
         private readonly IServiceRequestRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public AssignRequestCommandHandler(
+        public StartRequestCommandHandler(
             IServiceRequestRepository repository,
             IUnitOfWork unitOfWork)
         {
@@ -19,7 +19,7 @@ namespace NetOps.Application.Requests.Commands
         }
 
         public async Task Handle(
-            AssignRequestCommand request,
+            StartRequestCommand request,
             CancellationToken cancellationToken)
         {
             var serviceRequest = await _repository.GetByIdAsync(
@@ -30,7 +30,7 @@ namespace NetOps.Application.Requests.Commands
                 throw new NotFoundException(
                     $"Service request `{request.RequestId}` was not found.");
 
-            serviceRequest.AssignTo(request.TechnicianId);
+            serviceRequest.StartWork();
 
             await _unitOfWork.SaveChangesAsync(
                 cancellationToken);

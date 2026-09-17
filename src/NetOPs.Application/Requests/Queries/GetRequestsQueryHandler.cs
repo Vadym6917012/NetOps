@@ -1,14 +1,11 @@
 ﻿using MediatR;
 using NetOps.Application.Abstractions;
 using NetOps.Application.Requests.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NetOps.Application.Requests.Queries
 {
     public sealed class GetRequestsQueryHandler
-        :IRequestHandler<GetRequestsQuery, IReadOnlyList<ServiceRequestDto>>
+        : IRequestHandler<GetRequestsQuery, IReadOnlyList<ServiceRequestDto>>
     {
         private readonly IServiceRequestRepository _repository;
 

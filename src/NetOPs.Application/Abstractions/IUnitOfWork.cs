@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace NetOps.Application.Abstractions
+﻿namespace NetOps.Application.Abstractions
 {
     public interface IUnitOfWork
     {

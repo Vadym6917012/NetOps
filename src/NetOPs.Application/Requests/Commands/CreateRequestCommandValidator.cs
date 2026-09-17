@@ -1,7 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace NetOps.Application.Requests.Commands
 {
@@ -17,7 +14,7 @@ namespace NetOps.Application.Requests.Commands
             RuleFor(x => x.Description)
                 .NotEmpty()
                 .MaximumLength(2000);
-            
+
             RuleFor(x => x.Priority)
                 .IsInEnum();
         }
