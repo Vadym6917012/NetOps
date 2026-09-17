@@ -15,7 +15,13 @@ namespace NetOps.Infrastructure
             services.AddDbContext<AppDbContext>(options =>
                 options.UseNpgsql(connectionString));
 
-            services.AddScoped<IServiceRequestRepository, ServiceRequestRepository>();
+            services.AddScoped<
+                IServiceRequestRepository, 
+                ServiceRequestRepository>();
+
+            services.AddScoped<
+                IUnitOfWork, 
+                UnitOfWork>();
 
             return services;
         }

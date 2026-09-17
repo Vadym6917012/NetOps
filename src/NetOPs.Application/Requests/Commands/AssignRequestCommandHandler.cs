@@ -1,17 +1,16 @@
 ﻿using MediatR;
 using NetOps.Application.Abstractions;
-using NetOps.Application.Requests.DTOs;
-using NetOps.Domain.Entities;
+using NetOps.Application.Exceptions;
 
 namespace NetOps.Application.Requests.Commands
 {
-    public sealed class CreateRequestCommandHandler
-        : IRequestHandler<CreateRequestCommand, ServiceRequestDto>
+    public sealed class AssignRequestCommandHandler
+        : IRequestHandler<AssignRequestCommand>
     {
         private readonly IServiceRequestRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public CreateRequestCommandHandler(
+        public AssignRequestCommandHandler(
             IServiceRequestRepository repository,
             IUnitOfWork unitOfWork)
         {
@@ -19,23 +18,22 @@ namespace NetOps.Application.Requests.Commands
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<ServiceRequestDto> Handle(
-            CreateRequestCommand request,
+        public async Task Handle(
+            AssignRequestCommand request,
             CancellationToken cancellationToken)
         {
-            var serviceRequest = new ServiceRequest(
-                request.Title,
-                request.Description,
-                request.Priority);
-
-            await _repository.AddAsync(
-                serviceRequest,
+            var serviceRequest = await _repository.GetByIdAsync(
+                request.RequestId,
                 cancellationToken);
+
+            if (serviceRequest is null)
+                throw new NotFoundException(
+                    $"Service request `{request.RequestId}` was not found.");
+
+            serviceRequest.AssignTo(request.TechnicianId);
 
             await _unitOfWork.SaveChangesAsync(
                 cancellationToken);
-
-            return serviceRequest.ToDto();
         }
     }
 }

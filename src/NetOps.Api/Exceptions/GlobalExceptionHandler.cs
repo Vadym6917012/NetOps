@@ -1,6 +1,8 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using NetOps.Domain.Exceptions;
+using NetOps.Application.Exceptions;
 
 namespace NetOps.Api.Exceptions
 {
@@ -20,7 +22,47 @@ namespace NetOps.Api.Exceptions
             Exception exception,
             CancellationToken cancellationToken)
         {
-            if ( exception is not ValidationException validationException )
+            if (exception is NotFoundException notFoundException)
+            {
+                httpContext.Response.StatusCode =
+                    StatusCodes.Status404NotFound;
+
+                var notFoundProblemDetails = new ProblemDetails
+                {
+                    Status = StatusCodes.Status404NotFound,
+                    Title = "Resource not found",
+                    Detail = notFoundException.Message
+                };
+
+                return await _problemDetailsService.TryWriteAsync(
+                    new ProblemDetailsContext
+                    {
+                        HttpContext = httpContext,
+                        ProblemDetails = notFoundProblemDetails
+                    });
+            }
+
+            if (exception is BusinessRuleException businessRuleException)
+            {
+                httpContext.Response.StatusCode =
+                    StatusCodes.Status409Conflict;
+
+                var businessProblemDetails = new ProblemDetails
+                {
+                    Status = StatusCodes.Status409Conflict,
+                    Title = "Business rule violation.",
+                    Detail = businessRuleException.Message
+                };
+
+                return await _problemDetailsService.TryWriteAsync(
+                    new ProblemDetailsContext
+                    {
+                        HttpContext = httpContext,
+                        ProblemDetails = businessProblemDetails
+                    });
+            }
+
+            if (exception is not ValidationException validationException)
                 return false;
 
             httpContext.Response.StatusCode =

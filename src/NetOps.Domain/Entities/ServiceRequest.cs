@@ -1,5 +1,6 @@
 ﻿using NetOps.Domain.Common;
 using NetOps.Domain.Enums;
+using NetOps.Domain.Exceptions;
 
 namespace NetOps.Domain.Entities
 {
@@ -20,11 +21,13 @@ namespace NetOps.Domain.Entities
             string description,
             RequestPriority priority)
         {
-            if ( string.IsNullOrWhiteSpace(title) )
-                throw new ArgumentException("Title cannot be null or empty.", nameof(title));
+            if ( string.IsNullOrWhiteSpace(title))
+                throw new ArgumentException(
+                     "Title cannot be null or empty.", nameof(title));
 
-            if ( string.IsNullOrWhiteSpace(description) )
-                throw new ArgumentException("Description cannot be null or empty.", nameof(description));
+            if ( string.IsNullOrWhiteSpace(description))
+                throw new ArgumentException(
+                    "Description cannot be null or empty.", nameof(description));
 
             Title = title;
             Description = description;
@@ -35,7 +38,8 @@ namespace NetOps.Domain.Entities
         public void AssignTo(Guid technicanId)
         {
             if ( Status != RequestStatus.New )
-                throw new InvalidOperationException("Only new requests can be assigned to a technician.");
+                throw new BusinessRuleException(
+                    "Only new requests can be assigned to a technician.");
 
             TechnicianId = technicanId;
             Status = RequestStatus.Assigned;

@@ -31,6 +31,20 @@ namespace NetOps.Api.Controllers
                 request);
         }
 
+        [HttpPost("{id:guid}/assign")]
+        public async Task<IActionResult> Assign(
+            Guid id,
+            Guid technicianId,
+            CancellationToken cancellationToken)
+
+        {
+            await _sender.Send(
+                new AssignRequestCommand(id, technicianId),
+                cancellationToken);
+
+            return NoContent();
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAll(
             CancellationToken cancellationToken)

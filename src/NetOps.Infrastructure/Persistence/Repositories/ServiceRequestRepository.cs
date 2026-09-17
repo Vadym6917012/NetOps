@@ -18,9 +18,8 @@ namespace NetOps.Infrastructure.Persistence.Repositories
             CancellationToken cancellationToken)
         {
             await _context.ServiceRequests.AddAsync(
-                request, cancellationToken);
-
-            await _context.SaveChangesAsync(cancellationToken);
+                request, 
+                cancellationToken);
         }
 
         public async Task<ServiceRequest?> GetByIdAsync(
